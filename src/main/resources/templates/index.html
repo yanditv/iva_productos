@@ -1,0 +1,83 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Productos con IVA</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-100 p-6">
+    <h2 class="text-xl font-semibold mt-2 mb-6">Agregar Producto</h2>
+    <form action="/agregarProducto" method="post" class="space-y-4">
+      <div>
+        <label class="block font-medium">Nombre:</label>
+        <input
+          type="text"
+          name="nombre"
+          required
+          class="w-full border border-gray-300 rounded p-2"
+        />
+      </div>
+      <div>
+        <label class="block font-medium">Precio:</label>
+        <input
+          type="number"
+          step="0.01"
+          name="precio"
+          required
+          class="w-full border border-gray-300 rounded p-2"
+        />
+      </div>
+      <div>
+        <label class="block font-medium">Tipo:</label>
+        <select name="tipo" class="w-full border border-gray-300 rounded p-2">
+          <option value="Alimento">Alimento</option>
+          <option value="Electrodomestico">Electrodomestico</option>
+          <option value="Medicamento">Medicamento</option>
+          <option value="ProductoDeLujo">Producto De Lujo</option>
+          <option value="Educacion">Educacion</option>
+        </select>
+      </div>
+      <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">
+        Agregar Producto
+      </button>
+    </form>
+    <h1 class="text-2xl font-bold mt-4 mb-6">Lista de Productos</h1>
+
+    <div class="overflow-x-auto">
+      <table class="min-w-full bg-white border border-gray-300">
+        <thead>
+          <tr class="bg-gray-200">
+            <th class="py-2 px-4 border">Nombre</th>
+            <th class="py-2 px-4 border">Precio Original</th>
+            <th class="py-2 px-4 border">Precio con IVA</th>
+            <th class="py-2 px-4 border">Tipo</th>
+            <th class="py-2 px-4 border">Descripción del IVA</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="producto : ${productos}">
+            <td class="py-2 px-4 border" th:text="${producto.nombre}"></td>
+            <td class="py-2 px-4 border" th:text="${producto.precio}"></td>
+            <td
+              class="py-2 px-4 border"
+              th:text="${producto.precioConIVA}"
+            ></td>
+            <td
+              class="py-2 px-4 border"
+              th:text="${producto.class.simpleName}"
+            ></td>
+            <td
+              class="py-2 px-4 border"
+              th:text="${producto.descripcionIVA}"
+            ></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
